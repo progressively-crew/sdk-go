@@ -1,0 +1,23 @@
+name: Sdk Php
+on:
+  pull_request:
+    branches: ["master"]
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.1"
+
+      - name: Install PHP dependencies
+        run: composer install
+
+      - name: Tests
+        run: ./vendor/bin/phpunit tests
