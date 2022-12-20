@@ -11,8 +11,8 @@ type Builder struct {
 }
 
 type Sdk struct {
-	boolFlag map[string]bool
-	flags    map[string]interface{}
+	url   string
+	flags map[string]interface{}
 }
 
 func SdkBuilder(clientKey string, apiUrl string) *Builder {
@@ -39,10 +39,15 @@ func (b *Builder) Build() *Sdk {
 	b64 := base64.StdEncoding.EncodeToString(data)
 	url := b.apiUrl + "/sdk/" + b64
 
-	flags := GetFlags(url)
-	sdk := &Sdk{boolFlag: make(map[string]bool), flags: flags}
+	sdk := &Sdk{flags: make(map[string]interface{}), url: url}
+	sdk.LoadFlags()
 
 	return sdk
+}
+
+func (sdk *Sdk) LoadFlags() {
+	flags := GetFlags(sdk.url)
+	sdk.flags = flags
 }
 
 func (sdk *Sdk) Evaluate(flagKey string) interface{} {
