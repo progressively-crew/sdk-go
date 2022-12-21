@@ -1,7 +1,7 @@
 name: E2E
 on:
   pull_request:
-    branches: ["master"]
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
@@ -40,7 +40,10 @@ jobs:
             example/package-lock.json
             packages/backend/package-lock.json
       - uses: actions/setup-go@v3
-      - name: Install dependencies
+      - name: Install NPM dependencies
+        run: npm install && npm run test:prepare
+
+      - name: Install Go dependencies
         run: go install
         working-directory: ./example
 
