@@ -41,7 +41,7 @@ jobs:
             packages/backend/package-lock.json
       - uses: actions/setup-go@v3
       - name: Install NPM dependencies
-        run: npm install
+        run: npm install && npm run test:prepare
 
       - name: Install Go dependencies
         run: go install
