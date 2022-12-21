@@ -1,3 +1,3 @@
-module progressively/sdk
+module progressively
 
 go 1.19
