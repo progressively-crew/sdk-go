@@ -4,7 +4,8 @@ import (
 	"io"
 	"net/http"
 	"os"
-	progressively "progressively"
+
+	progressively "github.com/progressively-crew/sdk-go"
 )
 
 func getRoot(w http.ResponseWriter, r *http.Request) {
